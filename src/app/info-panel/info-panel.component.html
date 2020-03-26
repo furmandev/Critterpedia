@@ -1,0 +1,68 @@
+<div class="info-container" *ngIf="entry">
+  <div class="num">{{entry.num}}</div>
+  <h1>{{entry.name}}</h1>
+  {{entry.location || 'location unknown'}}
+  <div class="quick-info">
+    <div class="price">
+      <img class="bell-icon" src="assets/bells.png" alt="bells">
+      {{(entry.price | number) || 'unknown'}}
+    </div>
+    <div class="shadow">
+      Shadow size: {{entry.shadow || 'unknown'}}
+    </div>
+  </div>
+  <hr>
+  <h2>Seasonality</h2>
+  <table class="season-table">
+    <tr>
+      <td class="month" #month1  [ngStyle]="{'background-color': entry.activeMonths.includes('1') ? 'yellow' : 'unset', 'border': (currentMonth$ | async) === 1? 'solid red': 'unset'}">Jan.</td>
+      <td class="month" #month2  [ngStyle]="{'background-color': entry.activeMonths.includes('2') ? 'yellow' : 'unset', 'border': (currentMonth$ | async) === 2? 'solid red': 'unset'}">Feb.</td>
+      <td class="month" #month3  [ngStyle]="{'background-color': entry.activeMonths.includes('3') ? 'yellow' : 'unset', 'border': (currentMonth$ | async) === 3? 'solid red': 'unset'}">Mar.</td>
+      <td class="month" #month4  [ngStyle]="{'background-color': entry.activeMonths.includes('4') ? 'yellow' : 'unset', 'border': (currentMonth$ | async) === 4? 'solid red': 'unset'}">Apr.</td></tr><tr>
+      <td class="month" #month5  [ngStyle]="{'background-color': entry.activeMonths.includes('5') ? 'yellow' : 'unset', 'border': (currentMonth$ | async) === 5? 'solid red': 'unset'}">May</td>
+      <td class="month" #month6  [ngStyle]="{'background-color': entry.activeMonths.includes('6') ? 'yellow' : 'unset', 'border': (currentMonth$ | async) === 6? 'solid red': 'unset'}">June</td>
+      <td class="month" #month7  [ngStyle]="{'background-color': entry.activeMonths.includes('7') ? 'yellow' : 'unset', 'border': (currentMonth$ | async) === 7? 'solid red': 'unset'}">July</td>
+      <td class="month" #month8  [ngStyle]="{'background-color': entry.activeMonths.includes('8') ? 'yellow' : 'unset', 'border': (currentMonth$ | async) === 8? 'solid red': 'unset'}">Aug.</td></tr><tr>
+      <td class="month" #month9  [ngStyle]="{'background-color': entry.activeMonths.includes('9') ? 'yellow' : 'unset', 'border': (currentMonth$ | async) === 9? 'solid red': 'unset'}">Sept.</td>
+      <td class="month" #month10 [ngStyle]="{'background-color': entry.activeMonths.includes('10')? 'yellow' : 'unset', 'border': (currentMonth$ | async) === 10? 'solid red': 'unset'}">Oct.</td>
+      <td class="month" #month11 [ngStyle]="{'background-color': entry.activeMonths.includes('11')? 'yellow' : 'unset', 'border': (currentMonth$ | async) === 11? 'solid red': 'unset'}">Nov.</td>
+      <td class="month" #month12 [ngStyle]="{'background-color': entry.activeMonths.includes('12')? 'yellow' : 'unset', 'border': (currentMonth$ | async) === 11? 'solid red': 'unset'}">Dec.</td>
+    </tr>
+  </table>
+
+  <h2>Current Active Hours</h2>
+
+  <div class="clock-labels">
+    <div>12 AM</div>
+    <div style="margin-left: 18px">6</div>
+    <div style="margin-left: 50px">12 PM</div>
+    <div style="margin-left: 34px;">6</div>
+  </div>
+  <div class="clock">
+<div class="hour-big" #hour0  [ngStyle]="{'background-color': entry.activeHours.includes('0')?  'yellow' : 'unset', 'outline' : (currentHour$ | async) == 0?  'solid red' : 'unset'}"></div>
+    <div class="hour" #hour1  [ngStyle]="{'background-color': entry.activeHours.includes('1')?  'yellow' : 'unset', 'outline' : (currentHour$ | async) == 1?  'solid red' : 'unset'}"></div>
+    <div class="hour" #hour2  [ngStyle]="{'background-color': entry.activeHours.includes('2')?  'yellow' : 'unset', 'outline' : (currentHour$ | async) == 2?  'solid red' : 'unset'}"></div>
+    <div class="hour" #hour3  [ngStyle]="{'background-color': entry.activeHours.includes('3')?  'yellow' : 'unset', 'outline' : (currentHour$ | async) == 3?  'solid red' : 'unset'}"></div>
+    <div class="hour" #hour4  [ngStyle]="{'background-color': entry.activeHours.includes('4')?  'yellow' : 'unset', 'outline' : (currentHour$ | async) == 4?  'solid red' : 'unset'}"></div>
+    <div class="hour" #hour5  [ngStyle]="{'background-color': entry.activeHours.includes('5')?  'yellow' : 'unset', 'outline' : (currentHour$ | async) == 5?  'solid red' : 'unset'}"></div>
+<div class="hour-big" #hour6  [ngStyle]="{'background-color': entry.activeHours.includes('6')?  'yellow' : 'unset', 'outline' : (currentHour$ | async) == 6?  'solid red' : 'unset'}"></div>
+    <div class="hour" #hour7  [ngStyle]="{'background-color': entry.activeHours.includes('7')?  'yellow' : 'unset', 'outline' : (currentHour$ | async) == 7?  'solid red' : 'unset'}"></div>
+    <div class="hour" #hour8  [ngStyle]="{'background-color': entry.activeHours.includes('8')?  'yellow' : 'unset', 'outline' : (currentHour$ | async) == 8?  'solid red' : 'unset'}"></div>
+    <div class="hour" #hour9  [ngStyle]="{'background-color': entry.activeHours.includes('9')?  'yellow' : 'unset', 'outline' : (currentHour$ | async) == 9?  'solid red' : 'unset'}"></div>
+    <div class="hour" #hour10 [ngStyle]="{'background-color': entry.activeHours.includes('10')? 'yellow' : 'unset', 'outline' : (currentHour$ | async) == 10? 'solid red' : 'unset'}"></div>
+    <div class="hour" #hour11 [ngStyle]="{'background-color': entry.activeHours.includes('11')? 'yellow' : 'unset', 'outline' : (currentHour$ | async) == 11? 'solid red' : 'unset'}"></div>
+<div class="hour-big" #hour12 [ngStyle]="{'background-color': entry.activeHours.includes('12')? 'yellow' : 'unset', 'outline' : (currentHour$ | async) == 12? 'solid red' : 'unset'}"></div>
+    <div class="hour" #hour13 [ngStyle]="{'background-color': entry.activeHours.includes('13')? 'yellow' : 'unset', 'outline' : (currentHour$ | async) == 13? 'solid red' : 'unset'}"></div>
+    <div class="hour" #hour14 [ngStyle]="{'background-color': entry.activeHours.includes('14')? 'yellow' : 'unset', 'outline' : (currentHour$ | async) == 14? 'solid red' : 'unset'}"></div>
+    <div class="hour" #hour15 [ngStyle]="{'background-color': entry.activeHours.includes('15')? 'yellow' : 'unset', 'outline' : (currentHour$ | async) == 15? 'solid red' : 'unset'}"></div>
+    <div class="hour" #hour16 [ngStyle]="{'background-color': entry.activeHours.includes('16')? 'yellow' : 'unset', 'outline' : (currentHour$ | async) == 16? 'solid red' : 'unset'}"></div>
+    <div class="hour" #hour17 [ngStyle]="{'background-color': entry.activeHours.includes('17')? 'yellow' : 'unset', 'outline' : (currentHour$ | async) == 17? 'solid red' : 'unset'}"></div>
+<div class="hour-big" #hour18 [ngStyle]="{'background-color': entry.activeHours.includes('18')? 'yellow' : 'unset', 'outline' : (currentHour$ | async) == 18? 'solid red' : 'unset'}"></div>
+    <div class="hour" #hour19 [ngStyle]="{'background-color': entry.activeHours.includes('19')? 'yellow' : 'unset', 'outline' : (currentHour$ | async) == 19? 'solid red' : 'unset'}"></div>
+    <div class="hour" #hour20 [ngStyle]="{'background-color': entry.activeHours.includes('20')? 'yellow' : 'unset', 'outline' : (currentHour$ | async) == 20? 'solid red' : 'unset'}"></div>
+    <div class="hour" #hour21 [ngStyle]="{'background-color': entry.activeHours.includes('21')? 'yellow' : 'unset', 'outline' : (currentHour$ | async) == 21? 'solid red' : 'unset'}"></div>
+    <div class="hour" #hour22 [ngStyle]="{'background-color': entry.activeHours.includes('22')? 'yellow' : 'unset', 'outline' : (currentHour$ | async) == 22? 'solid red' : 'unset'}"></div>
+    <div class="hour" #hour23 [ngStyle]="{'background-color': entry.activeHours.includes('23')? 'yellow' : 'unset', 'outline' : (currentHour$ | async) == 23? 'solid red' : 'unset'}"></div>
+    <div class="hour-big"></div>
+  </div>
+</div>

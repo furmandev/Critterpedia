@@ -1,0 +1,50 @@
+table {
+  width: 100%;
+}
+h1 {
+  margin: 5px 0;
+}
+.month {
+  border: 1px solid black;
+  padding: 2px;
+}
+
+.shadow {
+  place-self: flex-end;
+  margin-left: auto;
+}
+
+.quick-info{
+  display: flex;
+}
+
+.bell-icon {
+  width: 24px;
+  vertical-align: bottom;
+}
+
+.clock {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.clock-labels {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.hour {
+  height: 10px;
+  border-left: solid black;
+  width: 10px;
+}
+
+.hour-big {
+  height: 20px;
+  border-left: solid black;
+  width: 10px;
+}

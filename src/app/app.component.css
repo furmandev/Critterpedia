@@ -1,0 +1,40 @@
+.info {
+  position: absolute;
+  top: 64px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #eee;
+}
+
+.logo {
+  height: 100%;
+}
+
+mat-sidenav {
+  background: cornsilk;
+  min-width: 25vw;
+  width: fit-content;
+  padding-right: 10px;
+}
+
+mat-sidenav-content {
+  background: burlywood;
+}
+
+.close-sidebar-icon {
+  position: absolute;
+  right: 0;
+}
+
+.close-sidebar-icon:hover {
+  cursor: pointer;
+}
+
+.menu-button {
+  position: absolute;
+  right: 0;
+}
+.menu-button:hover {
+  cursor: pointer;
+}

@@ -1,0 +1,24 @@
+.pedia {
+  padding: 10px;
+  max-height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.entry {
+  height: 19%;
+  margin: 1px;
+}
+
+.entry-img:hover {
+  cursor: pointer;
+  outline: solid black;
+}
+
+.entry-img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
