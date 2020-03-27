@@ -1,17 +1,17 @@
 <div class="search">
-  <mat-icon>search</mat-icon>
-  <mat-form-field appearance="outline">
+  <mat-icon class="search-icon">search</mat-icon>
+  <mat-form-field class="search-input">
   <input
     type = "text"
     placeholder = "Search"
-    aria-label = "Number"
+    aria-label = "Critter Search"
     matInput
     [(ngModel)]="q"
-    (ngModelChange)="typed()"
+    (ngModelChange)="query.emit(this.q)"
     [matAutocomplete] = "auto">
     <mat-autocomplete #auto = "matAutocomplete">
-      <mat-option *ngFor = "let option of searchOptions" [value] = "option">
-        {{option}}
+      <mat-option *ngFor = "let option of searchEntries" [value] = "option.name">
+        {{option.name}}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>

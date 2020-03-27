@@ -1,6 +1,5 @@
-import {Component, EventEmitter, Injectable, Input, OnInit, Output} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import * as XLSX from 'xlsx';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Entry} from '../../models/entry';
 
 
 @Component({
@@ -8,23 +7,26 @@ import * as XLSX from 'xlsx';
   templateUrl: './pedia.component.html',
   styleUrls: ['./pedia.component.css']
 })
-export class PediaComponent  {
+
+export class PediaComponent {
 
   @Output() selectedEntry = new EventEmitter();
   @Output() openInfo = new EventEmitter();
   @Input() currentHour$;
   @Input() currentMonth$;
-  @Input() entries;
+  @Input() entries: Entry[];
 
   entrySelected($event, force = false) {
     this.selectedEntry.emit($event);
-    if (force) { this.openInfo.emit(); }
+    if (force) {
+      this.openInfo.emit();
+    }
   }
 
   getStyle(entry: any, month, hour) {
     if (entry.activeHours.includes(hour.toString()) && entry.activeMonths.includes(month.toString())) {
-      return { };
+      return {};
     }
-    return { filter: 'grayscale(1)'};
+    return {filter: 'grayscale(1)'};
   }
 }

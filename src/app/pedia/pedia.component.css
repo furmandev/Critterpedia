@@ -8,6 +8,7 @@
 }
 
 .entry {
+  position: relative;
   height: 19%;
   margin: 1px;
 }
@@ -21,4 +22,12 @@
   max-height: 100%;
   max-width: 100%;
   object-fit: contain;
+}
+
+.is-caught-icon {
+  z-index: 1;
+  position: absolute;
+  width: 40%;
+  left: 0;
+  top: 0;
 }

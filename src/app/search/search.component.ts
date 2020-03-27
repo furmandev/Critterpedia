@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {query} from '@angular/animations';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Entry} from '../../models/entry';
 
 @Component({
   selector: 'app-search',
@@ -7,14 +7,7 @@ import {query} from '@angular/animations';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent {
-
-  @Input() searchOptions;
+  @Input() searchEntries: Entry[];
   @Output() query = new EventEmitter();
-  options = ["1", "2"];
   q;
-
-
-  typed() {
-    this.query.emit(this.q);
-  }
 }

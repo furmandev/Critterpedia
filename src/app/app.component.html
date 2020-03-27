@@ -1,26 +1,30 @@
 <!-- Toolbar -->
 <mat-toolbar>
-  <img
-    class="logo"
-    alt="Critterpedia Logo"
-    src="../assets/logo.png"
-  />
-  <span>Critterpedia (New Horizons)</span>
-<!--  <app-search-->
-<!--    (query)="searchFilter($event)"-->
-<!--    [searchOptions]="searchOptions"-->
-<!--  > </app-search>-->
+  <div class="header">
+    <img
+      class="logo"
+      alt="Critterpedia Logo"
+      src="../assets/logo.png"
+    />
+    <span class="title" *ngIf="!mobile">Critterpedia (New Horizons)</span>
+  </div>
+  <app-search
+    (query)="searchFilter($event)"
+    [searchEntries]="searchEntries"
+  > </app-search>
   <mat-icon class="menu-button" (click)="right.toggle()">settings</mat-icon>
 </mat-toolbar>
 
 <div class="content" role="main">
   <mat-sidenav-container class="info">
-    <mat-sidenav #left mode="side" position="start">
+    <mat-sidenav #left mode="side" position="start" [opened]="!mobile">
       <mat-icon class="close-sidebar-icon" (click)="left.close()">close</mat-icon>
       <app-info-panel
         [entry$]="selectedEntry$"
         [currentHour$]="currentHourInfo$"
         [currentMonth$]="currentMonthInfo$"
+        (caught)="caught($event, true)"
+        (uncaught)="caught($event, false)"
       > </app-info-panel>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -29,7 +33,7 @@
         (openInfo)="left.open()"
         [currentHour$]="currentHourPedia$"
         [currentMonth$]="currentMonthPedia$"
-        [entries]="entries"
+        [entries]="displayEntries"
       > </app-pedia>
     </mat-sidenav-content>
     <mat-sidenav #right mode="side" position="end">

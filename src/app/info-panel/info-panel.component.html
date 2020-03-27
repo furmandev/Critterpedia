@@ -65,4 +65,7 @@
     <div class="hour" #hour23 [ngStyle]="{'background-color': entry.activeHours.includes('23')? 'yellow' : 'unset', 'outline' : (currentHour$ | async) == 23? 'solid red' : 'unset'}"></div>
     <div class="hour-big"></div>
   </div>
+
+  <button *ngIf="!entry.isCaught" mat-raised-button color="primary" (click)="caught.emit(entry)">Mark as Caught</button>
+  <button *ngIf="entry.isCaught" mat-raised-button color="accent" (click)="uncaught.emit(entry)">Unmark as Caught</button>
 </div>

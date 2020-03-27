@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { InfoPanelComponent } from './info-panel/info-panel.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatToolbar, MatToolbarModule} from '@angular/material/toolbar';
+import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import { PediaComponent } from './pedia/pedia.component';
@@ -12,10 +12,10 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {HttpClientModule} from '@angular/common/http';
 import { SettingsComponent } from './settings/settings.component';
 import { SearchComponent } from './search/search.component';
-import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
@@ -37,7 +37,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     FormsModule,
     MatAutocompleteModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

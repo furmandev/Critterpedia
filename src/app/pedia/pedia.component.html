@@ -1,12 +1,16 @@
 <div class="pedia">
   <div class="entry" *ngFor="let entry of entries">
-      <img
-        (click)="entrySelected(entry, true)"
-        (mouseover)="entrySelected(entry)"
-        [alt]="entry.name"
-        [ngStyle]="getStyle(entry, currentMonth$ | async, currentMonth$ | async)"
-        class="entry-img"
-        src="assets/fish/{{entry.num}}.png"
-      >
+    <img
+      (click)="entrySelected(entry, true)"
+      [alt]="entry.name"
+      [ngStyle]="getStyle(entry, currentMonth$ | async, currentMonth$ | async)"
+      class="entry-img"
+      src="assets/fish/{{entry.num}}.png"
+    >
+    <img *ngIf="entry.isCaught"
+      class="is-caught-icon"
+      src="assets/fishingpole.png"
+      alt="caught"
+    >
   </div>
 </div>

@@ -38,3 +38,13 @@ mat-sidenav-content {
 .menu-button:hover {
   cursor: pointer;
 }
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+app-search {
+  height: 100%;
+  flex-grow: 1;
+}

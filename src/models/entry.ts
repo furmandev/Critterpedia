@@ -4,12 +4,13 @@ export interface Entry {
   image: string;
   num: number;
   price: number;
-  activeMonths: number[];
-  activeHours: number[];
+  activeMonths: string[];
+  activeHours: string[];
   location: string;
   weather: string;
   notes: string;
   shadow: string;
+  isCaught?: boolean;
 }
 
 export enum Type {
