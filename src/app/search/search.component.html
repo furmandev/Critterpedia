@@ -1,18 +1,20 @@
 <div class="search">
-  <mat-icon class="search-icon">search</mat-icon>
-  <mat-form-field class="search-input">
-  <input
-    type = "text"
-    placeholder = "Search"
-    aria-label = "Critter Search"
-    matInput
-    [(ngModel)]="q"
-    (ngModelChange)="query.emit(this.q)"
-    [matAutocomplete] = "auto">
-    <mat-autocomplete #auto = "matAutocomplete">
-      <mat-option *ngFor = "let option of searchEntries" [value] = "option.name">
+  <mat-form-field class="search-input" appearance="outline">
+    <mat-icon matPrefix class="search-icon">search</mat-icon>
+    <input
+      type = "text"
+      placeholder = "Search"
+      aria-label = "Critter Search"
+      matInput
+      [(ngModel)]="q"
+      (ngModelChange)="search(q)"
+      [matAutocomplete] = "auto">
+    <mat-autocomplete #auto = "matAutocomplete" (optionSelected)="optionSelected($event.option.value)" [displayWith]="display">
+      <mat-option *ngFor = "let option of searchEntries" [value] = "option">
+        <img class="option-image" [src]="option.image" alt="img">
         {{option.name}}
       </mat-option>
     </mat-autocomplete>
+    <mat-icon class="clear-icon" matSuffix (click)="q=''; query.emit(q)">clear</mat-icon>
   </mat-form-field>
 </div>

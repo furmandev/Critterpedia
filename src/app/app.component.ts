@@ -121,13 +121,13 @@ export class AppComponent implements OnInit {
             activeMonths: jEntry.activeMonths?.toString().split(' ') || [],
             type: jEntry.type === 'fish' ? Type.fish : Type.bug,
             name: jEntry.name,
-            image: jEntry.image,
             num: jEntry.num,
             price: jEntry.price,
             location: jEntry.location,
             weather: jEntry.weather,
             notes: jEntry.notes,
             shadow: jEntry.shadow,
+            image: ('assets/' + jEntry.type + '/' + jEntry.num + '.png'),
             isCaught: jEntry.type === 'fish' ? (caughtFish?.includes(jEntry.num.toString())) : (caughtBugs?.includes(jEntry.num.toString()))
           };
         });

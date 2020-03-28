@@ -11,6 +11,7 @@
   <app-search
     (query)="searchFilter($event)"
     [searchEntries]="searchEntries"
+    (optionSelectedEvent)="entrySelected($event, left, right)"
   > </app-search>
   <mat-icon class="menu-button" (click)="right.toggle()">settings</mat-icon>
 </mat-toolbar>

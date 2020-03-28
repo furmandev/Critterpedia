@@ -9,5 +9,15 @@ import {Entry} from '../../models/entry';
 export class SearchComponent {
   @Input() searchEntries: Entry[];
   @Output() query = new EventEmitter();
+  @Output() optionSelectedEvent = new EventEmitter();
   q;
+  display = (entry: Entry) => entry?.name;
+
+  optionSelected(value: Entry) {
+    this.optionSelectedEvent.emit(value);
+  }
+
+  search(q: any) {
+    this.query.emit(q.name || q);
+  }
 }
