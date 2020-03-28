@@ -11,16 +11,12 @@ import {Entry} from '../../models/entry';
 export class PediaComponent {
 
   @Output() selectedEntry = new EventEmitter();
-  @Output() openInfo = new EventEmitter();
   @Input() currentHour$;
   @Input() currentMonth$;
   @Input() entries: Entry[];
 
-  entrySelected($event, force = false) {
+  entrySelected($event) {
     this.selectedEntry.emit($event);
-    if (force) {
-      this.openInfo.emit();
-    }
   }
 
   getStyle(entry: any, month, hour) {

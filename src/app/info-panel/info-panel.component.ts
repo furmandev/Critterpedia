@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Entry} from '../../models/entry';
 
 @Component({
@@ -6,18 +6,12 @@ import {Entry} from '../../models/entry';
   templateUrl: './info-panel.component.html',
   styleUrls: ['./info-panel.component.css']
 })
-export class InfoPanelComponent implements OnInit {
+export class InfoPanelComponent {
 
-  @Input() entry$;
-  @Input() currentHour$;
-  @Input() currentMonth$;
+  @Input() entry: Entry;
+  @Input() currentHour;
+  @Input() currentMonth;
   @Output() caught = new EventEmitter<Entry>();
   @Output() uncaught = new EventEmitter<Entry>();
-  entry: Entry;
 
-  ngOnInit(): void {
-    this.entry$.subscribe(entry => {
-      this.entry = entry;
-    });
-  }
 }
