@@ -46,7 +46,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatButtonToggleModule,
     MatSlideToggleModule,
   ],
-  providers: [],
+  providers: [
+    {provide: 'googleTagManagerId',  useValue: 'GTM-KX9VB2T'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

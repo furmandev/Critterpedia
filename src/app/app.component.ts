@@ -7,6 +7,7 @@ import Fuse from 'fuse.js/dist/fuse.min.js';
 import {MatSidenav} from '@angular/material/sidenav';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {InfoPanelComponent} from './info-panel/info-panel.component';
+import {GoogleTagManagerService} from 'angular-google-tag-manager';
 
 @Component({
   selector: 'app-root',
@@ -30,15 +31,19 @@ export class AppComponent implements OnInit {
   filterByCaught = false;
   filterByLeaving = false;
   searchQuery: string;
+
   ngOnInit() {
     if (window.screen.width <= 700) {
       this.mobile = true;
     }
+
+    this.gtmService.addGtmToDom();
   }
 
   constructor(
     private http: HttpClient,
-    private bottomSheet: MatBottomSheet
+    private bottomSheet: MatBottomSheet,
+    private gtmService: GoogleTagManagerService,
   ) {
     const date = new Date();
     this.currentMonthPedia$.next(date.getMonth() + 1);
