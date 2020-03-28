@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Entry} from '../../models/entry';
+import {Entry, Type} from '../../models/entry';
 
 @Component({
   selector: 'app-info-panel',
@@ -13,5 +13,6 @@ export class InfoPanelComponent {
   @Input() currentMonth;
   @Output() caught = new EventEmitter<Entry>();
   @Output() uncaught = new EventEmitter<Entry>();
+  creatureType: typeof Type = Type;
 
 }

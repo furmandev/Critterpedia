@@ -7,7 +7,7 @@
       <img class="bell-icon" src="assets/bells.png" alt="bells">
       {{(entry.price | number) || 'unknown'}}
     </div>
-    <div class="shadow">
+    <div *ngIf="entry.type === creatureType.fish" class="shadow">
       Shadow size: {{entry.shadow || 'unknown'}}
     </div>
   </div>
