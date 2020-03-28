@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   filterCreatureType = Type.fish;
   filterByCaught = false;
   filterByLeaving = false;
-
+  searchQuery: string;
   ngOnInit() {
     if (window.screen.width <= 700) {
       this.mobile = true;
@@ -72,15 +72,9 @@ export class AppComponent implements OnInit {
     }
   }
 
-  searchFilter($event: any) {
-    console.log($event);
-    if (!$event) {
-      this.searchEntries = this.entries;
-      this.displayEntries = this.entries;
-      return;
-    }
-    this.searchEntries = this.fuse.search($event).map(s => s.item);
-    this.displayEntries = this.searchEntries;
+  searchFilter(query: string) {
+    this.searchQuery = query;
+    this.applyFilters();
   }
 
 
@@ -145,9 +139,6 @@ export class AppComponent implements OnInit {
   }
 
   applyFilters() {
-    this.displayEntries = this.entries;
-    this.searchEntries = this.entries;
-
     const filter = (entry: Entry) => {
       return (
         entry.type === this.filterCreatureType &&
@@ -157,8 +148,16 @@ export class AppComponent implements OnInit {
       );
     };
 
-    this.displayEntries = this.displayEntries.filter(filter);
-    this.searchEntries = this.searchEntries.filter(filter);
+    let filteredEntries;
+    if (this.searchQuery && this.searchQuery !== '') {
+      filteredEntries = this.fuse.search(this.searchQuery).map(s => s.item);
+    } else {
+      filteredEntries = this.entries;
+    }
+    filteredEntries = filteredEntries.filter(filter);
+
+    this.searchEntries = filteredEntries;
+    this.displayEntries = filteredEntries;
   }
 
   filterByCaughtEvent(caught: boolean) {
