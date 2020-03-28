@@ -70,7 +70,7 @@ export class AppComponent implements OnInit {
 
 
   entrySelected($event: Entry, left: MatSidenav, right: MatSidenav) {
-    if (right.opened) {
+    if (right.opened && this.mobile) {
       right.close();
       return;
     }
