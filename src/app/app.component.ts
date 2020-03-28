@@ -170,8 +170,8 @@ export class AppComponent implements OnInit {
 
   nextMonth(month: number): string {
     month++;
-    if (month === 24) {
-      month = 0;
+    if (month === 13) {
+      month = 1;
     }
     return month.toString();
   }
