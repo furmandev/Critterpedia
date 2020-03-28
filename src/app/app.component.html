@@ -40,9 +40,11 @@
         [filterCreatureType]="filterCreatureType"
         [filterByCaught]="filterByCaught"
         [filterByLeaving]="filterByLeaving"
+        [filterByActive]="filterByActive"
         (filterCreatureTypeEvent)="filterCreatureTypeEvent($event)"
         (filterByCaughtEvent)="filterByCaughtEvent($event)"
         (filterByLeavingEvent)="filterByLeavingEvent($event)"
+        (filterByActiveEvent)="filterByActiveEvent($event)"
       ></app-settings>
     </mat-sidenav>
   </mat-sidenav-container>

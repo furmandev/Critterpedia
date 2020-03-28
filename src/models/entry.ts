@@ -17,3 +17,7 @@ export enum Type {
   fish,
   bug
 }
+
+export function isActive(entry: Entry, hour: string | number, month: string | number) {
+  return entry.activeHours.includes(hour.toString()) && entry.activeMonths.includes(month.toString());
+}

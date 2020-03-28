@@ -16,4 +16,8 @@
 <mat-slide-toggle (change)="filterByLeavingChange($event.checked)" [checked]="filterByLeaving">
   Leaving this month
 </mat-slide-toggle>
+<hr>
+<mat-slide-toggle (change)="filterByActiveChange($event.checked)" [checked]="filterByActive">
+  Only show active
+</mat-slide-toggle>
 

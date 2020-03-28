@@ -4,7 +4,7 @@
   >
     <img
       [alt]="entry.name"
-      [ngStyle]="getStyle(entry, currentMonth$ | async, currentMonth$ | async)"
+      [ngStyle]="getStyle(entry, currentMonth$ | async, currentHour$ | async)"
       class="entry-img"
       [src]="'assets/' + (entry.type == creatureType.fish? 'fish' : 'bugs') + '/' + entry.num + '.png'"
     >

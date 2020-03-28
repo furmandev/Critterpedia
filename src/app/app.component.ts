@@ -2,12 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import * as XLSX from 'xlsx';
 import {HttpClient} from '@angular/common/http';
-import {Entry, Type} from '../models/entry';
+import {Entry, isActive, Type} from '../models/entry';
 import Fuse from 'fuse.js/dist/fuse.min.js';
 import {MatSidenav} from '@angular/material/sidenav';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {InfoPanelComponent} from './info-panel/info-panel.component';
 import {GoogleTagManagerService} from 'angular-google-tag-manager';
+import {GoogleAnalyticsService} from 'angular-ga';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,20 @@ import {GoogleTagManagerService} from 'angular-google-tag-manager';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
+  constructor(
+    private http: HttpClient,
+    private bottomSheet: MatBottomSheet,
+    private gtmService: GoogleTagManagerService,
+    private ga: GoogleAnalyticsService
+  ) {
+    const date = new Date();
+    this.currentMonthPedia$.next(date.getMonth() + 1);
+    this.currentHourPedia$.next(date.getHours());
+    this.currentMonth = date.getMonth() + 1;
+    this.currentHour = date.getHours();
+    this.getData();
+  }
   title = 'Critterpedia';
   currentMonthPedia$ = new BehaviorSubject(0);
   currentHourPedia$ = new BehaviorSubject(0);
@@ -30,7 +45,16 @@ export class AppComponent implements OnInit {
   filterCreatureType = Type.fish;
   filterByCaught = false;
   filterByLeaving = false;
+  filterByActive = false;
   searchQuery: string;
+
+  static nextMonth(month: number): string {
+    month++;
+    if (month === 13) {
+      month = 1;
+    }
+    return month.toString();
+  }
 
   ngOnInit() {
     if (window.screen.width <= 700) {
@@ -38,19 +62,10 @@ export class AppComponent implements OnInit {
     }
 
     this.gtmService.addGtmToDom();
-  }
-
-  constructor(
-    private http: HttpClient,
-    private bottomSheet: MatBottomSheet,
-    private gtmService: GoogleTagManagerService,
-  ) {
-    const date = new Date();
-    this.currentMonthPedia$.next(date.getMonth() + 1);
-    this.currentHourPedia$.next(date.getHours());
-    this.currentMonth = date.getMonth() + 1;
-    this.currentHour = date.getHours();
-    this.getData();
+    this.ga.pageview.emit({
+      page: '/home',
+      title: 'home'
+    });
   }
 
 
@@ -148,8 +163,10 @@ export class AppComponent implements OnInit {
       return (
         entry.type === this.filterCreatureType &&
         (this.filterByCaught ? !entry.isCaught : true) &&
-        (this.filterByLeaving ? !entry.activeMonths.includes(this.nextMonth(this.currentMonth))
-                                && entry.activeMonths.includes(this.currentMonth.toString()) : true)
+        (this.filterByLeaving ? !entry.activeMonths.includes(AppComponent.nextMonth(this.currentMonth))
+                                && entry.activeMonths.includes(this.currentMonth.toString()) : true) &&
+        (this.filterByActive ? isActive(entry, this.currentHour, this.currentMonth) : true)
+
       );
     };
 
@@ -177,11 +194,8 @@ export class AppComponent implements OnInit {
     this.applyFilters();
   }
 
-  nextMonth(month: number): string {
-    month++;
-    if (month === 13) {
-      month = 1;
-    }
-    return month.toString();
+  filterByActiveEvent(filter: boolean) {
+    this.filterByActive = filter;
+    this.applyFilters();
   }
 }

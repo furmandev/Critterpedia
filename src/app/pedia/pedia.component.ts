@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Entry, Type} from '../../models/entry';
+import {Entry, isActive, Type} from '../../models/entry';
 
 
 @Component({
@@ -22,7 +22,7 @@ export class PediaComponent {
   }
 
   getStyle(entry: any, month, hour) {
-    if (entry.activeHours.includes(hour.toString()) && entry.activeMonths.includes(month.toString())) {
+    if (isActive(entry, hour, month)) {
       return {};
     }
     return {filter: 'grayscale(1)'};
