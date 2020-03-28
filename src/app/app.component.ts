@@ -86,6 +86,7 @@ export class AppComponent implements OnInit {
       const bufferPromise = result.arrayBuffer();
 
       const caughtFish = localStorage.getItem('fish')?.split(',');
+      const caughtBugs = localStorage.getItem('bugs')?.split(',');
 
       bufferPromise.then(buffer => {
 
@@ -109,7 +110,7 @@ export class AppComponent implements OnInit {
             weather: jEntry.weather,
             notes: jEntry.notes,
             shadow: jEntry.shadow,
-            isCaught: caughtFish?.includes(jEntry.num.toString())
+            isCaught: jEntry.type === 'fish' ? (caughtFish?.includes(jEntry.num.toString())) : (caughtBugs?.includes(jEntry.num.toString()))
           };
         });
 
@@ -125,13 +126,13 @@ export class AppComponent implements OnInit {
 
   caught(entry, isCaught) {
     entry.isCaught = isCaught;
-    const fish = localStorage.getItem('fish')?.split(',') || [];
+    const local = localStorage.getItem(entry.type === Type.fish ? 'fish' : 'bugs')?.split(',') || [];
     if (isCaught) {
-      fish.push(entry.num.toString());
+      local.push(entry.num.toString());
     } else {
-      fish.splice(fish.indexOf(entry.num.toString()), 1);
+      local.splice(local.indexOf(entry.num.toString()), 1);
     }
-    localStorage.setItem('fish', fish.join(','));
+    localStorage.setItem(entry.type === Type.fish ? 'fish' : 'bugs', local.join(','));
   }
 
   filterCreatureTypeEvent(creatureType: Type) {
