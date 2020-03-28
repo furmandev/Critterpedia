@@ -14,11 +14,19 @@ h1 {
   margin-left: auto;
 }
 
+.wikia-link {
+  place-self: flex-end;
+  margin-left: auto;
+}
+
 .notes {
   place-self: flex-end;
   margin-left: auto;
 }
 
+.header-info {
+  display: flex;
+}
 .quick-info{
   display: flex;
 }
