@@ -151,6 +151,8 @@ export class AppComponent implements OnInit {
       local.splice(local.indexOf(entry.num.toString()), 1);
     }
     localStorage.setItem(entry.type === Type.fish ? 'fish' : 'bugs', local.join(','));
+
+    this.applyFilters();
   }
 
   filterCreatureTypeEvent(creatureType: Type) {
