@@ -49,7 +49,11 @@ export class AppComponent implements OnInit {
   }
 
 
-  entrySelected($event: Entry, left: MatSidenav) {
+  entrySelected($event: Entry, left: MatSidenav, right: MatSidenav) {
+    if (right.opened) {
+      right.close();
+      return;
+    }
     this.selectedEntry = $event;
     if (!this.mobile) {
       left.open();
