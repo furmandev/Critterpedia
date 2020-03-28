@@ -8,6 +8,7 @@
 }
 
 .entry {
+  max-width: max-content;
   position: relative;
   height: 19%;
   margin: 1px;

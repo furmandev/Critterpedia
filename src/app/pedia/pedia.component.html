@@ -6,11 +6,11 @@
       [alt]="entry.name"
       [ngStyle]="getStyle(entry, currentMonth$ | async, currentMonth$ | async)"
       class="entry-img"
-      src="assets/fish/{{entry.num}}.png"
+      [src]="'assets/' + (entry.type == creatureType.fish? 'fish' : 'bugs') + '/' + entry.num + '.png'"
     >
     <img *ngIf="entry.isCaught"
          class="is-caught-icon"
-         src="assets/fishingpole.png"
+         [src]="entry.type == creatureType.fish? 'assets/fishingpole.png' : 'assets/net.png'"
          alt="caught"
     >
   </div>

@@ -17,7 +17,7 @@
 
 <div class="content" role="main">
   <mat-sidenav-container class="info">
-    <mat-sidenav #left mode="side" position="start" [opened]="!mobile">
+    <mat-sidenav #left mode="side" position="start">
       <mat-icon class="close-sidebar-icon" (click)="left.close()">close</mat-icon>
       <app-info-panel
         [entry]="selectedEntry"
@@ -36,9 +36,14 @@
       > </app-pedia>
     </mat-sidenav-content>
     <mat-sidenav #right mode="side" position="end">
-      <app-settings>
-
-      </app-settings>
+      <app-settings
+        [filterCreatureType]="filterCreatureType"
+        [filterByCaught]="filterByCaught"
+        [filterByLeaving]="filterByLeaving"
+        (filterCreatureTypeEvent)="filterCreatureTypeEvent($event)"
+        (filterByCaughtEvent)="filterByCaughtEvent($event)"
+        (filterByLeavingEvent)="filterByLeavingEvent($event)"
+      ></app-settings>
     </mat-sidenav>
   </mat-sidenav-container>
 

@@ -26,6 +26,9 @@ export class AppComponent implements OnInit {
   private fuse;
   mobile: boolean;
   selectedEntry: Entry;
+  filterCreatureType = Type.fish;
+  filterByCaught = false;
+  filterByLeaving = false;
 
   ngOnInit() {
     if (window.screen.width <= 700) {
@@ -56,8 +59,12 @@ export class AppComponent implements OnInit {
       info.instance.entry = this.selectedEntry;
       info.instance.currentMonth = this.currentMonth;
       info.instance.currentHour = this.currentHour;
-      info.instance.caught.subscribe(e => { this.caught(e, true); });
-      info.instance.uncaught.subscribe(e => { this.caught(e, false); });
+      info.instance.caught.subscribe(e => {
+        this.caught(e, true);
+      });
+      info.instance.uncaught.subscribe(e => {
+        this.caught(e, false);
+      });
     }
   }
 
@@ -125,5 +132,47 @@ export class AppComponent implements OnInit {
       fish.splice(fish.indexOf(entry.num.toString()), 1);
     }
     localStorage.setItem('fish', fish.join(','));
+  }
+
+  filterCreatureTypeEvent(creatureType: Type) {
+    this.filterCreatureType = creatureType;
+    this.applyFilters();
+  }
+
+  applyFilters() {
+    this.displayEntries = this.entries;
+    this.searchEntries = this.entries;
+
+    const filter = (entry: Entry) => {
+      return (
+        entry.type === this.filterCreatureType &&
+        (this.filterByCaught ? !entry.isCaught : true) &&
+        (this.filterByLeaving ? !entry.activeMonths.includes(this.nextMonth(this.currentMonth))
+                                && entry.activeMonths.includes(this.currentMonth.toString()) : true)
+      );
+    };
+
+    this.displayEntries = this.displayEntries.filter(filter);
+    this.searchEntries = this.searchEntries.filter(filter);
+  }
+
+  filterByCaughtEvent(caught: boolean) {
+    this.filterByCaught = caught;
+
+    this.applyFilters();
+  }
+
+  filterByLeavingEvent(filter: boolean) {
+    this.filterByLeaving = filter;
+
+    this.applyFilters();
+  }
+
+  nextMonth(month: number): string {
+    month++;
+    if (month === 24) {
+      month = 0;
+    }
+    return month.toString();
   }
 }

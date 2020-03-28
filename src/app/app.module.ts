@@ -17,6 +17,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatButtonModule} from '@angular/material/button';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -41,6 +43,8 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
     ReactiveFormsModule,
     MatButtonModule,
     MatBottomSheetModule,
+    MatButtonToggleModule,
+    MatSlideToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

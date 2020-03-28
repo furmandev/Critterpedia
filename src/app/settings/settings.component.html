@@ -1,0 +1,19 @@
+<mat-button-toggle-group name="creature type" aria-label="creature type" [value]="filterCreatureType === creatureType.fish? 'fish' : 'bugs'">
+  <mat-button-toggle
+    value="fish"
+    (change)="filterByType($event.value)"
+  >Fish</mat-button-toggle>
+  <mat-button-toggle
+    value="bugs"
+    (change)="filterByType($event.value)"
+  >Bugs</mat-button-toggle>
+</mat-button-toggle-group>
+<hr>
+<mat-slide-toggle (change)="filterByCaughtChange($event.checked)" [checked]="filterByCaught">
+  Only show uncaught
+</mat-slide-toggle>
+<hr>
+<mat-slide-toggle (change)="filterByLeavingChange($event.checked)" [checked]="filterByLeaving">
+  Leaving this month
+</mat-slide-toggle>
+

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Entry} from '../../models/entry';
+import {Entry, Type} from '../../models/entry';
 
 
 @Component({
@@ -14,6 +14,8 @@ export class PediaComponent {
   @Input() currentHour$;
   @Input() currentMonth$;
   @Input() entries: Entry[];
+  creatureType: typeof Type = Type;
+
 
   entrySelected($event) {
     this.selectedEntry.emit($event);
