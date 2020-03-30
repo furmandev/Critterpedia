@@ -12,12 +12,15 @@ export class SettingsComponent {
   @Input() filterByLeaving: boolean;
   @Input() filterByCaught: boolean;
   @Input() filterByActive: boolean;
+  @Input() sortBy: string;
   @Output() filterCreatureTypeEvent = new EventEmitter<Type>();
   @Output() filterByCaughtEvent = new EventEmitter<boolean>();
   @Output() filterByLeavingEvent = new EventEmitter<boolean>();
   @Output() filterByActiveEvent = new EventEmitter<boolean>();
+  @Output() sortByEvent = new EventEmitter<string>();
 
   creatureType: typeof Type = Type;
+
   constructor(
     private ga: GoogleAnalyticsService
   ) {

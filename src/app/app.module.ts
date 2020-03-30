@@ -21,6 +21,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 import { GoogleAnalyticsModule, GA_TOKEN } from 'angular-ga';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { GoogleAnalyticsModule, GA_TOKEN } from 'angular-ga';
     MatBottomSheetModule,
     MatButtonToggleModule,
     MatSlideToggleModule,
-    GoogleAnalyticsModule.forRoot()
+    GoogleAnalyticsModule.forRoot(),
+    MatSelectModule
   ],
   providers: [
     {provide: 'googleTagManagerId',  useValue: 'GTM-KX9VB2T'},

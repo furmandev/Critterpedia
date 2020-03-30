@@ -20,4 +20,12 @@
 <mat-slide-toggle (change)="filterByActiveChange($event.checked)" [checked]="filterByActive">
   Only show active
 </mat-slide-toggle>
+<hr>
+<mat-form-field>
+  <mat-label>Order by</mat-label>
+  <mat-select [(value)]="sortBy" (valueChange)="sortByEvent.emit(sortBy)">
+    <mat-option value="Critterpedia">Critterpedia</mat-option>
+    <mat-option value="Bells">Bells</mat-option>
+  </mat-select>
+</mat-form-field>
 

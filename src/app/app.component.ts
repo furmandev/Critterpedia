@@ -47,6 +47,7 @@ export class AppComponent implements OnInit {
   filterByLeaving = false;
   filterByActive = false;
   searchQuery: string;
+  sortOption = 'Critterpedia';
 
   static nextMonth(month: number): string {
     month++;
@@ -182,6 +183,8 @@ export class AppComponent implements OnInit {
 
     this.searchEntries = filteredEntries;
     this.displayEntries = filteredEntries;
+
+    this.sortDisplayEntries();
   }
 
   filterByCaughtEvent(caught: boolean) {
@@ -199,5 +202,22 @@ export class AppComponent implements OnInit {
   filterByActiveEvent(filter: boolean) {
     this.filterByActive = filter;
     this.applyFilters();
+  }
+
+  sortDisplayEntries(newSortOption = null) {
+    if (newSortOption) {
+      this.sortOption = newSortOption;
+    }
+    console.log(this.sortOption);
+    let sortFn;
+    switch (this.sortOption) {
+      case 'Bells':
+        sortFn = (a: Entry, b: Entry) => b.price - a.price;
+        break;
+      case 'Critterpedia':
+        sortFn = (a: Entry, b: Entry) => a.num - b.num;
+        break;
+    }
+    this.displayEntries.sort(sortFn);
   }
 }
