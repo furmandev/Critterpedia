@@ -41,9 +41,11 @@
         [filterByCaught]="filterByCaught"
         [filterByLeaving]="filterByLeaving"
         [filterByActive]="filterByActive"
+        [filterByNew]="filterByNew"
         (filterCreatureTypeEvent)="filterCreatureTypeEvent($event)"
         (filterByCaughtEvent)="filterByCaughtEvent($event)"
         (filterByLeavingEvent)="filterByLeavingEvent($event)"
+        (filterByNewEvent)="filterByNewEvent($event)"
         (filterByActiveEvent)="filterByActiveEvent($event)"
         (sortByEvent)="sortDisplayEntries($event)"
       ></app-settings>

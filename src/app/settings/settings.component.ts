@@ -9,12 +9,14 @@ import {Type} from '../../models/entry';
 export class SettingsComponent {
   @Input() filterCreatureType: Type;
   @Input() filterByLeaving: boolean;
+  @Input() filterByNew: boolean;
   @Input() filterByCaught: boolean;
   @Input() filterByActive: boolean;
   @Input() sortBy: string;
   @Output() filterCreatureTypeEvent = new EventEmitter<Type>();
   @Output() filterByCaughtEvent = new EventEmitter<boolean>();
   @Output() filterByLeavingEvent = new EventEmitter<boolean>();
+  @Output() filterByNewEvent = new EventEmitter<boolean>();
   @Output() filterByActiveEvent = new EventEmitter<boolean>();
   @Output() sortByEvent = new EventEmitter<string>();
 
@@ -34,6 +36,10 @@ export class SettingsComponent {
 
   filterByLeavingChange(checked: boolean) {
     this.filterByLeavingEvent.emit(checked);
+  }
+
+  filterByNewChange(checked: boolean) {
+    this.filterByNewEvent.emit(checked);
   }
 
   filterByActiveChange(checked: boolean) {

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import * as XLSX from 'xlsx';
 import {HttpClient} from '@angular/common/http';
-import {Entry, isActive, Type} from '../models/entry';
+import {Entry, isActive, isNew, Type} from '../models/entry';
 import Fuse from 'fuse.js/dist/fuse.min.js';
 import {MatSidenav} from '@angular/material/sidenav';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
@@ -45,6 +45,7 @@ export class AppComponent implements OnInit {
   filterCreatureType = Type.fish;
   filterByCaught = false;
   filterByLeaving = false;
+  filterByNew = false;
   filterByActive = false;
   searchQuery: string;
   sortOption = 'Critterpedia';
@@ -167,7 +168,8 @@ export class AppComponent implements OnInit {
         (this.filterByCaught ? !entry.isCaught : true) &&
         (this.filterByLeaving ? !entry.activeMonths.includes(AppComponent.nextMonth(this.currentMonth))
                                 && entry.activeMonths.includes(this.currentMonth.toString()) : true) &&
-        (this.filterByActive ? isActive(entry, this.currentHour, this.currentMonth) : true)
+        (this.filterByActive ? isActive(entry, this.currentHour, this.currentMonth) : true) &&
+        (this.filterByNew ? isNew(entry, this.currentMonth) : true)
 
       );
     };
@@ -194,7 +196,13 @@ export class AppComponent implements OnInit {
 
   filterByLeavingEvent(enableFilter: boolean) {
     this.filterByLeaving = enableFilter;
+    if (this.filterByLeaving && this.filterByNew) { this.filterByNew = false; }
+    this.applyFilters();
+  }
 
+  filterByNewEvent(enableFilter: boolean) {
+    this.filterByNew = enableFilter;
+    if (this.filterByNew && this.filterByLeaving) { this.filterByLeaving = false; }
     this.applyFilters();
   }
 
