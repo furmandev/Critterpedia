@@ -20,8 +20,19 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
-import { GoogleAnalyticsModule, GA_TOKEN } from 'angular-ga';
 import {MatSelectModule} from '@angular/material/select';
+import {Angulartics2Module} from 'angulartics2';
+import {Angulartics2GoogleAnalytics} from 'angulartics2/ga';
+import {RouterModule, Routes} from '@angular/router';
+
+
+const ROUTES: Routes = [
+  { path: '',      component: AppComponent },
+  { path: 'settings', component: SettingsComponent },
+  { path: 'search', component: SettingsComponent },
+  { path: 'info', component: InfoPanelComponent },
+  { path: 'pedia', component: PediaComponent },
+];
 
 
 @NgModule({
@@ -48,12 +59,11 @@ import {MatSelectModule} from '@angular/material/select';
     MatBottomSheetModule,
     MatButtonToggleModule,
     MatSlideToggleModule,
-    GoogleAnalyticsModule.forRoot(),
-    MatSelectModule
+    MatSelectModule,
+    RouterModule.forRoot(ROUTES),
+    Angulartics2Module.forRoot()
   ],
   providers: [
-    {provide: 'googleTagManagerId',  useValue: 'GTM-KX9VB2T'},
-    {provide: 'GA_TOKEN', useValue: 'UA-162110676-1' }
   ],
   bootstrap: [AppComponent]
 })

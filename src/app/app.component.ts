@@ -7,9 +7,9 @@ import Fuse from 'fuse.js/dist/fuse.min.js';
 import {MatSidenav} from '@angular/material/sidenav';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {InfoPanelComponent} from './info-panel/info-panel.component';
-import {GoogleTagManagerService} from 'angular-google-tag-manager';
-import {GoogleAnalyticsService} from 'angular-ga';
-
+import {Angulartics2GoogleAnalytics} from 'angulartics2/ga';
+import {NavigationEnd, Router} from '@angular/router';
+import {filter} from 'rxjs/operators';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,8 +20,8 @@ export class AppComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private bottomSheet: MatBottomSheet,
-    private gtmService: GoogleTagManagerService,
-    private ga: GoogleAnalyticsService
+    private ga: Angulartics2GoogleAnalytics,
+    private router: Router
   ) {
     const date = new Date();
     this.currentMonthPedia$.next(date.getMonth() + 1);
@@ -62,11 +62,10 @@ export class AppComponent implements OnInit {
       this.mobile = true;
     }
 
-    this.gtmService.addGtmToDom();
-    this.ga.pageview.emit({
-      page: '/home',
-      title: 'home'
-    });
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) =>
+        this.ga.pageTrack(event.urlAfterRedirects));
   }
 
 
@@ -162,7 +161,7 @@ export class AppComponent implements OnInit {
   }
 
   applyFilters() {
-    const filter = (entry: Entry) => {
+    const filterFunction = (entry: Entry) => {
       return (
         entry.type === this.filterCreatureType &&
         (this.filterByCaught ? !entry.isCaught : true) &&
@@ -179,7 +178,7 @@ export class AppComponent implements OnInit {
     } else {
       filteredEntries = this.entries;
     }
-    filteredEntries = filteredEntries.filter(filter);
+    filteredEntries = filteredEntries.filter(filterFunction);
 
     this.searchEntries = filteredEntries;
     this.displayEntries = filteredEntries;
@@ -193,14 +192,14 @@ export class AppComponent implements OnInit {
     this.applyFilters();
   }
 
-  filterByLeavingEvent(filter: boolean) {
-    this.filterByLeaving = filter;
+  filterByLeavingEvent(enableFilter: boolean) {
+    this.filterByLeaving = enableFilter;
 
     this.applyFilters();
   }
 
-  filterByActiveEvent(filter: boolean) {
-    this.filterByActive = filter;
+  filterByActiveEvent(enableFilter: boolean) {
+    this.filterByActive = enableFilter;
     this.applyFilters();
   }
 
@@ -208,7 +207,6 @@ export class AppComponent implements OnInit {
     if (newSortOption) {
       this.sortOption = newSortOption;
     }
-    console.log(this.sortOption);
     let sortFn;
     switch (this.sortOption) {
       case 'Bells':
